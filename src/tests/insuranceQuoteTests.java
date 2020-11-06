@@ -33,15 +33,15 @@ public class insuranceQuoteTests {
 		CompareQuotePage quotePage = new CompareQuotePage(driver);
 		quotePage.clickGetQuote();		
 		quotePage.clickSingleQuote();
-		quotePage.enterName();
-		quotePage.selectDOB();
+		quotePage.enterName("Insurance", "Quote");
+		quotePage.selectDOB("6","1","1980");
 		quotePage.selectNonSmoker();
-		quotePage.selectLevelTerm();
-		quotePage.enterSumAssured();
-		quotePage.selectCriticalIllnessCover();
-		quotePage.enterEmailAddress();
-		quotePage.enterPhoneNumber();
-		quotePage.enterAddress();
+		quotePage.selectLevelTerm("20");
+		quotePage.enterSumAssured("250000");
+		quotePage.selectCriticalIllnessCover("15000");
+		quotePage.enterEmailAddress("widecem309@mailreds.com");
+		quotePage.enterPhoneNumber("07812120038");
+		quotePage.enterAddress("7", "RG1 6NY");
 		quotePage.selectDoNotContact();
 		quotePage.confirmGetQuote();
 		

@@ -33,29 +33,31 @@ public class CompareQuotePage
 		clickJM.click();
 	}
 	
-	public void enterName()
+	public void enterName(String forename, String surname)
 	{
 		driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourTitle_MR")).click();
-		driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourFirstName")).sendKeys("Insurance");
-		driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourLastName")).sendKeys("Quote");
+		WebElement firstname = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourFirstName"));
+		firstname.sendKeys(forename);
+		WebElement lastname = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourLastName"));
+		lastname.sendKeys(surname);
 	}
 	
-	public void selectDOB()
+	public void selectDOB(String day, String month, String year)
 	{
 		WebElement selectDay = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourDateOfBirth_Day"));	
 		selectDay.click();
 		Select DOBday = new Select(selectDay);
-		DOBday.selectByValue("6");
+		DOBday.selectByValue(day);
 		
 		WebElement selectMonth = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourDateOfBirth_Month"));	
 		selectDay.click();
 		Select DOBMonth = new Select(selectMonth);
-		DOBMonth.selectByValue("1");
+		DOBMonth.selectByValue(month);
 		
 		WebElement selectYear = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourDateOfBirth_Year"));	
 		selectYear.click();
 		Select DOBYear = new Select(selectYear);
-		DOBYear.selectByValue("1980");
+		DOBYear.selectByValue(year);
 		
 	}
 	
@@ -65,48 +67,48 @@ public class CompareQuotePage
 		selectNonSmoker.click();
 	}
 	
-	public void selectLevelTerm()
+	public void selectLevelTerm(String levelTerm)
 	{
 		WebElement selectLevelTerm = driver.findElement(By.id("LifeInsurance_YourDetails_YourLifeCover_CoverType_LT"));	
 		selectLevelTerm.click();
 		WebElement selectLevelYears = driver.findElement(By.id("LifeInsurance_YourDetails_YourLifeCover_TermYears"));	
-		selectLevelYears.sendKeys("20");		
+		selectLevelYears.sendKeys(levelTerm);		
 	}
 	
-	public void enterSumAssured()
+	public void enterSumAssured(String value)
 	{
 		WebElement sumAssured = driver.findElement(By.id("LifeInsurance_YourDetails_YourLifeCover_CoverAmount"));	
-		sumAssured.sendKeys("250000");
+		sumAssured.sendKeys(value);
 	}
 	
-	public void selectCriticalIllnessCover()
+	public void selectCriticalIllnessCover(String amountOfCover)
 	{
 		WebElement clickCriticalCoverYes = driver.findElement(By.id("LifeInsurance_YourDetails_YourLifeCover_CriticalIllnessCover_YES"));	
 		clickCriticalCoverYes.click();
 		WebElement clickCriticalCoverAdditional = driver.findElement(By.id("LifeInsurance_YourDetails_YourLifeCover_CriticalIllnessCoverType_A"));	
 		clickCriticalCoverAdditional.click();
 		WebElement enterCriticalCoverAmount = driver.findElement(By.id("LifeInsurance_YourDetails_YourLifeCover_CriticalIllnessAmount"));	
-		enterCriticalCoverAmount.sendKeys("15000");
+		enterCriticalCoverAmount.sendKeys(amountOfCover);
 	}
 	
-	public void enterEmailAddress()
+	public void enterEmailAddress(String email)
 	{
 		WebElement enterEmail = driver.findElement(By.id("LifeInsurance_YourDetails_YourContactDetails_EmailAddress"));	
-		enterEmail.sendKeys("widecem309@mailreds.com");
+		enterEmail.sendKeys(email);
 	}
 	
-	public void enterPhoneNumber()
+	public void enterPhoneNumber(String value)
 	{
 		WebElement enterPhone = driver.findElement(By.id("LifeInsurance_YourDetails_YourContactDetails_PhoneNumber"));	
-		enterPhone.sendKeys("07812120038");
+		enterPhone.sendKeys(value);
 	}
 	
-	public void enterAddress()
+	public void enterAddress(String houseNo, String postcode)
 	{
 		WebElement enterHouseNumber = driver.findElement(By.id("LifeInsurance_YourDetails_YourContactDetails_Address_HouseNumberOrName"));	
-		enterHouseNumber.sendKeys("7");
+		enterHouseNumber.sendKeys(houseNo);
 		WebElement enterPostCode = driver.findElement(By.id("LifeInsurance_YourDetails_YourContactDetails_Address_Postcode"));	
-		enterPostCode.sendKeys("RG1 6NY");
+		enterPostCode.sendKeys(postcode);
 		WebElement clickFindAddress = driver.findElement(By.id("Address_FindMyAddress"));	
 		clickFindAddress.click();
 	}
