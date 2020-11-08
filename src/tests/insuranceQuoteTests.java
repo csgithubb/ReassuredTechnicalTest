@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import PageObjects.CompareQuotePage;
 
 public class insuranceQuoteTests {
@@ -46,14 +45,14 @@ public class insuranceQuoteTests {
 		quotePage.confirmGetQuote();
 		
 		//take screenshot and save Quote
-		quotePage.waitForExpectedElementtakeScreenshot();
+		quotePage.waitForExpectedElementtakeBeforeScreenshot();
 				
 		// Get updated quote
 		quotePage.removeCriticalCover();
 		quotePage.clickUpdateResults();
 		
 		//take screenshot and save Updated Quote
-		quotePage.waitForExpectedElementtakeScreenshot();
+		quotePage.waitForExpectedElementtakeAfterScreenshot();
 
 		//closing the browser window
 		quotePage.closeQuotePage();

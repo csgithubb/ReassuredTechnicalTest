@@ -4,16 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CompareQuotePage 
-{
+{	
 	WebDriver driver;
 	
 	public CompareQuotePage(WebDriver d)
@@ -35,7 +37,8 @@ public class CompareQuotePage
 	
 	public void enterName(String forename, String surname)
 	{
-		driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourTitle_MR")).click();
+		WebElement title = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourTitle_MR"));
+		title.click();
 		WebElement firstname = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourFirstName"));
 		firstname.sendKeys(forename);
 		WebElement lastname = driver.findElement(By.id("LifeInsurance_YourDetails_YourDetails_YourLastName"));
@@ -125,6 +128,8 @@ public class CompareQuotePage
 		clickConfirm.click();
 		WebElement clickGetQuote = driver.findElement(By.className("Submitter__actions__button"));	
 		clickGetQuote.click();		
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//H2[text()='Summary of key details']")));	
 	}
 	
 	public void removeCriticalCover()
@@ -135,14 +140,22 @@ public class CompareQuotePage
 	
 	public void clickUpdateResults()
 	{
+		WebDriverWait updatedResults = new WebDriverWait(driver, 10);
+		updatedResults.until(ExpectedConditions.visibilityOfElementLocated(By.id("LifeInsurance_YourQuotes_Filter_FilterResults_UpdateResults")));	
 		WebElement updateResultsNewQuote = driver.findElement(By.id("LifeInsurance_YourQuotes_Filter_FilterResults_UpdateResults"));	
-		updateResultsNewQuote.click();		
+		updateResultsNewQuote.click();	
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//H2[text()='Summary of key details']")));
 	}
 	
-	public void waitForExpectedElementtakeScreenshot()
+	public void waitForExpectedElementtakeBeforeScreenshot()
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//H2[text()='Summary of key details']")));	
+		
+		// Scroll down page
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,750)");
 				
 		//Take the screenshot
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -150,6 +163,23 @@ public class CompareQuotePage
         //Copying the file to a location and using try catch block to handle exception
         try {
             FileUtils.copyFile(screenshot, new File("C:\\Users\\chris\\eclipse-workspace\\ReassuredTest\\Screenshots\\Quote.png"));         
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+	}
+	
+	public void waitForExpectedElementtakeAfterScreenshot()
+	{	
+		// Scroll down page
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,250)");
+				
+		//Take the screenshot
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        
+        //Copying the file to a location and using try catch block to handle exception
+        try {
+            FileUtils.copyFile(screenshot, new File("C:\\Users\\chris\\eclipse-workspace\\ReassuredTest\\Screenshots\\UpdatedQuote.png"));         
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
